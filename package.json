@@ -4,11 +4,19 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "vercel-build": "cd client && npm install && npm run build",
     "dev": "node scripts/dev.js",
     "start": "node server/src/index.js",
-    "dev:client": "node -e \"const { spawn } = require('child_process'); spawn(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['run', 'dev', '--prefix', 'client'], { stdio: 'inherit', shell: true });\"",
+    "dev:client": "npm run dev --prefix client",
     "dev:server": "node server/src/index.js",
-    "install:all": "node -e \"const { spawnSync } = require('child_process'); const cmd = process.platform === 'win32' ? 'npm.cmd' : 'npm'; spawnSync(cmd, ['install', '--prefix', 'client'], { stdio: 'inherit' }); spawnSync(cmd, ['install', '--prefix', 'server'], { stdio: 'inherit' });\"",
-    "build": "node -e \"const { spawnSync } = require('child_process'); const cmd = process.platform === 'win32' ? 'npm.cmd' : 'npm'; spawnSync(cmd, ['run', 'build', '--prefix', 'client'], { stdio: 'inherit' });\""
+    "install:all": "npm install --prefix client && npm install --prefix server"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
   }
 }

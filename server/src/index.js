@@ -886,7 +886,7 @@ app.post('/api/admin/import-csv', verifyAdmin, (req, res) => {
   }
 });
 
-// Serve frontend Single Page Application (SPA) for any non-API routes
+// Serve frontend Single Page Application (SPA) for any non-API routes in local / standalone mode
 app.get('*', (req, res, next) => {
   if (req.path.startsWith('/api')) {
     return next();
@@ -894,7 +894,11 @@ app.get('*', (req, res, next) => {
   res.sendFile(path.join(clientDistPath, 'index.html'));
 });
 
-// Start listening
-app.listen(port, () => {
-  console.log(`OpportunityAI Server running on port ${port}`);
-});
+// Start listening only in standalone / local development (Vercel uses serverless export)
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`OpportunityAI Server running on port ${port}`);
+  });
+}
+
+export default app;
