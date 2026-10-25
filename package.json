@@ -1,0 +1,14 @@
+{
+  "name": "opportunityai",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "start": "node server/src/index.js",
+    "dev:client": "node -e \"const { spawn } = require('child_process'); spawn(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['run', 'dev', '--prefix', 'client'], { stdio: 'inherit', shell: true });\"",
+    "dev:server": "node server/src/index.js",
+    "install:all": "node -e \"const { spawnSync } = require('child_process'); const cmd = process.platform === 'win32' ? 'npm.cmd' : 'npm'; spawnSync(cmd, ['install', '--prefix', 'client'], { stdio: 'inherit' }); spawnSync(cmd, ['install', '--prefix', 'server'], { stdio: 'inherit' });\"",
+    "build": "node -e \"const { spawnSync } = require('child_process'); const cmd = process.platform === 'win32' ? 'npm.cmd' : 'npm'; spawnSync(cmd, ['run', 'build', '--prefix', 'client'], { stdio: 'inherit' });\""
+  }
+}
